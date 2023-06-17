@@ -1,0 +1,66 @@
+<app-header [title]="titre"></app-header>
+<ion-content class="ion-padding" contentId="tt1"> 
+    <form [formGroup]="missionForm" (ngSubmit)="submitForm()" novalidate>
+        <ion-item class="form_item">
+            <p slot="start" class="label-input-form" style="margin-right:40px ;">Client</p>
+            <ion-input class="input-form"  placeholder="Nom" class="form-control" formControlName="client" type="text" required></ion-input>
+          </ion-item>
+        <ion-item class="form_item">
+            <p slot="start" class="label-input-form" style="margin-right:40px ;">Début</p>
+            <ion-input class="input-form"  placeholder="Date de début" class="form-control" formControlName="datedebut" type="text" required></ion-input>
+          </ion-item>
+        <ion-item class="form_item">
+            <p slot="start" class="label-input-form" style="margin-right:40px;">Fin</p>
+            <ion-input class="input-form"  placeholder="Date de fin" class="form-control" formControlName="datefin" type="text" required></ion-input>
+          </ion-item>
+          <ion-item lines="none" class="form_item">
+          <p slot="start" class="label-input-form" style="margin-right:40px;">Produit</p>
+          <ion-radio-group value="JAVA">
+            <ion-row>
+              <ion-col>
+            <ion-radio class="btn_radio" value="PHP">PHP</ion-radio><br />
+            </ion-col>
+            <ion-col>
+            <ion-radio  class="btn_radio" value="JAVA">JAVA</ion-radio><br />
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+          <ion-radio class="btn_radio" value="SQL">SQL</ion-radio><br />
+          </ion-col>
+          <ion-col>
+          <ion-radio  class="btn_radio" value="IONIC">IONIC</ion-radio><br />
+          </ion-col>
+        </ion-row>
+        
+          </ion-radio-group>
+        </ion-item>
+        
+
+        <ion-item>
+          <p  slot="start" class="label-input-form" style="margin-right:40px ;width: max-content;">fournisseur</p>
+          <ion-list>
+              <ion-item>
+                <ion-select formControlName="fournisseur"  [compareWith]="compareTech" interface="popover" style="width: 100%;" placeholder="choisir un fournisseur">
+                  <ion-select-option value="Microsoft">Microsoft</ion-select-option>
+                  <ion-select-option value="Microsoft">Oracle</ion-select-option>
+                  <ion-select-option value="Microsoft">Apache</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+        </ion-item>
+        <ion-item class="form_item" lines="none">
+          <p slot="start" class="label-input-form" style="margin-right:40px ;">Statut</p>
+          <p slot="start" class="label-input-form" style="margin-right:40px;color: green;">Accepté</p>
+        </ion-item>
+        <ion-list no-lines style="bottom:10px; position: fixed;left: 10%;right: 10%;">
+          <ion-item lines="none" lines="none">
+            <ion-button style="width: 100%;height: 1cm;" name="accepter" type="submit" class="submit-button" color="success">Accepter</ion-button>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-button name="refuser" style="width:100%;height: 1cm;"   type="submit" class="submit-button" color="danger">Refuser</ion-button>
+          </ion-item>
+        </ion-list>
+  </form>
+
+</ion-content>

@@ -1,0 +1,36 @@
+.label-input-form{
+    font-family: Cursive;
+    font-weight: bold;
+    font-size:small;
+    width: 20%;
+    color: rgba(0,140,255,1);
+}
+
+.input-form{
+    border-color:rgba(0,140,255,1) ;
+}
+
+label {
+    text-decoration: line-through;
+}
+
+ion-item{
+    margin-top: 5%;
+    width: 100%;
+    
+}
+.submit-button {
+    position: fixed;
+    left: 10%;
+    bottom: 10px;
+    right: 10%;
+    height: 1cm; 
+}
+
+
+ion-select-option{
+    font-family: Cursive;
+    font-weight: bold;
+    font-size:small;
+    color: rgba(0,140,255,1);
+}

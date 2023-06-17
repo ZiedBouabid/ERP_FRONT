@@ -1,0 +1,63 @@
+<app-header [title]="titre"></app-header>
+<ion-content class="ion-padding" contentId="tt1"> 
+  <ion-row>
+    <ion-col   size-md="6" size-lg="6" size-xs="6">
+    <ion-button  class="btn_en_accepte" fill="outline">Mission Acceptée</ion-button>
+  </ion-col>
+  <ion-col   size-md="6" size-lg="6" size-xs="6">
+    <ion-button class="btn_en_attente" fill="solid">Mission en Attente</ion-button>
+  </ion-col>
+  </ion-row>
+  <ion-list>
+    <ion-card *ngFor="let mission of missions" (click)="goToMission(mission)">
+      <ion-grid>
+       <ion-row>
+        <ion-col>
+
+
+          <ion-grid>
+            <ion-row style="padding: 10px;"  class="ion-text-center">
+              <ion-label>Techno:</ion-label> {{mission.type}}
+            </ion-row>
+            <ion-row style="padding: 10px;"  class="ion-text-center">
+              <ion-label>Entreprise:</ion-label> {{mission.description}}
+            </ion-row>
+          </ion-grid>
+        
+        
+        
+        </ion-col>
+         <ion-col>
+          
+
+          <ion-grid>
+            <ion-row style="padding: 10px;"  class="ion-text-center">
+            <ion-label>Debut:</ion-label>  {{this.datepipe.transform(mission.datedebut, 'dd/MM/yyyy')}}
+            </ion-row>
+            <ion-row style="padding: 10px;"  class="ion-text-center">
+              <ion-label>Fin:</ion-label>  {{this.datepipe.transform(mission.datefin, 'dd/MM/yyyy')}}
+            </ion-row>
+          </ion-grid>
+        
+        
+        </ion-col>
+        <ion-col>
+          <ion-grid>
+            <ion-row style="padding: 10px;"  class="ion-text-center">
+              <ion-label>Statut mission:</ion-label> 
+              <ion-label></ion-label> 
+            </ion-row>
+            <ion-row style="padding: 10px;"  class="ion-text-center">
+              <ion-label  [ngStyle]="mission.statut=='Accepté'? {'color':'green'}:{'color':'red'}"  >{{mission.statut}}  </ion-label> 
+            </ion-row>
+          </ion-grid>
+        
+        
+        </ion-col>
+
+       </ion-row>
+      </ion-grid>
+  
+    </ion-card>
+  </ion-list>
+</ion-content>

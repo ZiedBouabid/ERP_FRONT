@@ -1,0 +1,53 @@
+<app-header [title]="titre"></app-header>
+<ion-content class="ion-padding" contentId="tt1"> 
+    <form [formGroup]="fournisseurForm" (ngSubmit)="submitForm()" novalidate>
+        <ion-item class="form_item">
+            <p slot="start" class="label-input-form" style="margin-right:40px ;">Fournisseur</p>
+            <ion-input class="input-form"  placeholder="Nom" class="form-control" formControlName="nom" type="text" required></ion-input>
+          </ion-item>
+        <ion-item class="form_item">
+            <p slot="start" class="label-input-form" style="margin-right:40px ;">Description</p>
+            <ion-input class="input-form"  placeholder="Description" class="form-control" formControlName="description" type="text" required></ion-input>
+          </ion-item>
+        <ion-item class="form_item">
+            <p slot="start" class="label-input-form" style="margin-right:40px;">Télephone</p>
+            <ion-input class="input-form"  placeholder="Télephone" class="form-control" formControlName="tele" type="text" required></ion-input>
+          </ion-item>
+          <ion-item class="form_item">
+            <p slot="start" class="label-input-form" style="margin-right:40px;">Certification</p>
+            <ion-input class="input-form"  placeholder="Certification" class="form-control" formControlName="certification" type="text" required></ion-input>
+          </ion-item>
+          <ion-item lines="none" class="form_item">
+          <p slot="start" class="label-input-form" style="margin-right:40px;">Compétences</p>
+          <ion-radio-group value="JAVA">
+            <ion-row>
+              <ion-col>
+            <ion-radio class="btn_radio" value="PHP">PHP</ion-radio><br />
+            </ion-col>
+            <ion-col>
+            <ion-radio  class="btn_radio" value="JAVA">JAVA</ion-radio><br />
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+          <ion-radio class="btn_radio" value="SQL">SQL</ion-radio><br />
+          </ion-col>
+          <ion-col>
+          <ion-radio  class="btn_radio" value="IONIC">IONIC</ion-radio><br />
+          </ion-col>
+        </ion-row>
+        
+          </ion-radio-group>
+        </ion-item>
+    
+        <ion-list no-lines style="bottom:10px; position: fixed;left: 10%;right: 10%;">
+          <ion-item lines="none" lines="none">
+            <ion-button style="width: 100%;height: 1cm;" name="accepter" type="submit" class="submit-button" color="success">Modifier</ion-button>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-button name="refuser" style="width:100%;height: 1cm;"   type="submit" class="submit-button" color="danger">supprimer</ion-button>
+          </ion-item>
+        </ion-list>
+  </form>
+
+</ion-content>

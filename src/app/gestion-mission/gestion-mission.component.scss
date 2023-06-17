@@ -1,0 +1,48 @@
+ion-button {
+    --border-radius: 0px;
+}
+.btn_en_accepte{
+    float: right;
+    --margin: 0 !important;
+    width: 90%;
+    height: 1cm;
+    font-family: Cursive;
+    font-size:medium;
+   
+  
+}
+.btn_en_attente{
+    float: left;
+    width: 90%;
+    height: 1cm;
+    font-family: Cursive;
+    font-size:medium;
+}
+
+ion-col{
+    --padding-start: 0 !important;
+    --padding-end: 0 !important;
+    --padding-top: 0 !important;
+    --padding-bottom: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    --margin-left: 0 !important;
+    --margin-right: 0 !important;
+
+}
+
+ion-label{
+    font-family: Cursive;
+    font-size:small;
+    font-weight: bold;
+    color: rgba(0,140,255,1);
+}
+ion-text-center{
+    height: 50%;
+}
+
+.vcenter{
+   height: 50%;
+  }
