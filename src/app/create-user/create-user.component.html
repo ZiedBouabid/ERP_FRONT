@@ -4,29 +4,30 @@
   <ion-card style="padding: 1em;height: 90%;">
       <ion-list>
     <ion-item>
-      <ion-label class="label-input-form" color="primary" >Nom :</ion-label>
-      <ion-input fill="outline"  class="input-form" [(ngModel)]="user.nom" type="text" clearInput></ion-input>
+      <ion-label class="label-item" color="primary" >Nom :</ion-label>
+      <ion-input fill="outline"  class="input-item" [(ngModel)]="user.nom" type="text" clearInput></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label class="label-input-form" color="primary" >Prénom :</ion-label>
-      <ion-input type="text"  class="input-form" [(ngModel)]="user.prenom" clearInput></ion-input>
+      <ion-label class="label-item" color="primary" >Prénom :</ion-label>
+      <ion-input type="text"  class="input-item"  [(ngModel)]="user.prenom" clearInput></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label class="label-input-form" color="primary" >Email :</ion-label>
-      <ion-input type="text" class="input-form" [(ngModel)]="user.email" clearInput></ion-input>
+      <ion-label class="label-item" color="primary" >Email :</ion-label>
+      <ion-input type="text"class="input-item" [(ngModel)]="user.email" clearInput></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label class="label-input-form" color="primary" >Mot de passe :</ion-label>
-      <ion-input type="text" class="input-form" [(ngModel)]="user.password" clearInput></ion-input>
+      <ion-label class="label-item" color="primary" >Mot de passe :</ion-label>
+      <ion-input type="text" class="input-item" [(ngModel)]="user.password" clearInput></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label class="label-input-form" color="primary" >Email personelle  :</ion-label>
-      <ion-input type="text" class="input-form" [(ngModel)]="user.email" clearInput></ion-input>
+      <ion-label class="label-item" color="primary" >Email personelle  :</ion-label>
+      <ion-input type="text" class="input-item" [(ngModel)]="user.email" clearInput></ion-input>
     </ion-item>
 
       <ion-item>
         <ion-select
+          class="label-item"
           style="font-family:klavika_light_italic;"
           label="Role"
           interface="action-sheet"

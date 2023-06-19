@@ -20,10 +20,12 @@ import { ModifierMissionComponent } from './modifier-mission/modifier-mission.co
 import { GestionFournisseursComponent } from './gestion-fournisseurs/gestion-fournisseurs.component';
 import { ModifierFournisseurComponent } from './modifier-fournisseur/modifier-fournisseur.component';
 import { AjouterFournisseurComponent } from './ajouter-fournisseur/ajouter-fournisseur.component';
+import { GestionCHPLAComponent } from './gestion-chpla/gestion-chpla.component';
 
 @NgModule({
   declarations: [AppComponent,AjouterFournisseurComponent,ModifierFournisseurComponent,
     HeaderComponent,GestionFournisseursComponent,WelcomeComponent,ConnexionComponent,
+    GestionCHPLAComponent,
     CreateUserComponent,GestionMissionComponent,ForgetPasswordComponent,ModifierMissionComponent],
 
   imports: [RouterModule, AppRoutingModule,HttpClientModule,SharedModule,IonicModule.forRoot({

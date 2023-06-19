@@ -12,6 +12,7 @@ import { ModifierFournisseurComponent } from './modifier-fournisseur/modifier-fo
 import { ModifierMissionComponent } from './modifier-mission/modifier-mission.component';
 import { RoleGuard } from './role.guard';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { GestionCHPLAComponent } from './gestion-chpla/gestion-chpla.component';
 
 const routes: Routes = [
   {
@@ -75,6 +76,9 @@ const routes: Routes = [
   data: {
     roles: ['Admin','RSPLA']
   }
+  },
+  {path: 'gestionCHplans',
+  component: GestionCHPLAComponent,
   },
 ];
 

@@ -14,8 +14,10 @@ const helper = new JwtHelperService();
 export const TOKEN_KEY = 'jwt-token';
 
 export interface User{
-  email:string
+ email:string
  id: string
+ tele? : string
+ secondeRole? : string
  nom: string
  password: string
  prenom:string

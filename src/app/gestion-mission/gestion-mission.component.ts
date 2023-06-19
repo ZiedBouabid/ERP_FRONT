@@ -1,10 +1,10 @@
+import { Fournisseur } from './../gestion-fournisseurs/gestion-fournisseurs.component';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter, map, take } from 'rxjs';
 import { MissionService } from '../mission.service';
-import { Fournisseur } from '../gestion-fournisseurs/gestion-fournisseurs.component';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -45,6 +45,7 @@ export class GestionMissionComponent  implements OnInit {
       this.missions = this.missions_origine;
     }
   }
+
 }
 
 export interface Mission{
@@ -54,7 +55,6 @@ export interface Mission{
     description:string;
     datedebut:string
     datefin: string
-    fournisseur: Fournisseur | null
     statut : string
     produits : Produit[]
  }
@@ -63,4 +63,5 @@ export interface Mission{
  export interface Produit{
   id:number | null ;
   nom : string;
+  fournisseurs: Fournisseur[]
 }

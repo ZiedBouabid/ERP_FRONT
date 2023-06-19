@@ -1,67 +1,12 @@
-.label-input-form{
+.label-item{
   font-family:klavika_light_italic;
   font-weight: bold;
   font-size:small;
   color: rgba(0,140,255,1);
 }
-
-.input-form{
-font-family:Arial, Helvetica, sans-serif;
-
-font-weight: bold;
-font-size:small;
-color: black;
+.input-item{
+  font-family:klavika_light_italic;
 }
-
-.span_add{
-  font-family:Arial, Helvetica, sans-serif;
-
-font-weight: bold;
-font-size:small;
-color: rgba(0,140,255,1);
-}
-
-.input-form{
-  border-color:rgba(0,140,255,1) ;
-}
-
-label {
-  text-decoration: line-through;
-}
-
-ion-item{
-  margin-top: 5%;
-  width: 100%;
-
-}
-
-.btn_radio{
-  font-family: Cursive;
-  font-weight: bold;
-  font-size:small;
-  color: rgb(105,105,105);
-}
-
-.btnvalider{
-  position: absolute ;
-  left: 10%;
-  bottom: 10px;
-  right: 10%;
-  height: 2cm;
-}
-
-ion-select-option{
-  font-family: Cursive;
-  font-weight: bold;
-  font-size:small;
-  color: rgba(0,140,255,1);
-}
-
-ion-select{
-  --border-width:100%
-  --font-family:klavika_light_italic;
-}
-
 .submit-button_accepter{
   font-family:klavika_regular_italic ;
   font-size: medium;
@@ -69,58 +14,3 @@ ion-select{
 }
 
 
-.label-input-form{
-  width: max-content;
-}
-
-
-ion-alert div[class="alert-radio-label"]{
-  font-family:klavika_regular_italic ;
-  }
-
-
-.fullheight {
-height: 100%;
-}
-
-.xc {
-display: flex;
-align-items: center;
-justify-content: center;
-}
-
-
-.input-cover{
-display: none;
-}
-
-
-ion-select {
-  --placeholder-color: rgba(0,140,255,1);;
-  --placeholder-opacity: 1;
-  width: 100%;
-  font-family: Cursive;
-  font-weight: bold;
-  justify-content: center;
-}
-
-
-
-ion-select::part(icon) {
-  color: rgba(0,140,255,1);;
-  opacity: 1;
-}
-
-ion-select{
-
-  font-family: Cursive;
-  font-size:small;
-  color: rgba(0,140,255,1);
-
-}
-
-.status{
-  font-family: Cursive;
-  font-weight: bold;
-  font-size:small;
-}

@@ -26,7 +26,6 @@ export class ModifierMissionComponent  implements OnInit {
     datedebut:'',
     datefin: '',
     statut : '',
-    fournisseur: null,
     produits : []
   }
 
@@ -38,7 +37,6 @@ export class ModifierMissionComponent  implements OnInit {
     datedebut:'',
     datefin: '',
     statut : '',
-    fournisseur: null,
     produits : []
   }
 
@@ -61,12 +59,12 @@ ngOnInit() {
 ajouterProduit(){
     this.mission.produits.push({
       id:0,
-      nom:''
+      nom:'',
+      fournisseurs:[]
     })
 }
 
 ajouterFournisseur(fournisseur : Fournisseur){
-  this.mission.fournisseur = fournisseur
 }
 
 
@@ -141,6 +139,9 @@ accepterMission(){
 
     }
 
+    compareObject(a: any, b: any) {
+      return a.id === b.id;
+   }
 
 }
 
