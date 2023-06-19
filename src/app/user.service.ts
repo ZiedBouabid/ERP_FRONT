@@ -39,27 +39,23 @@ export class UserService {
   isAuthenticated: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   public  userData = new BehaviorSubject(null);
-  
+
   public userinfos : any = null  ;
 
   constructor(private storageService: StorageService, private http: HttpClient, private router: Router) {
-    
+
     this.loadStoredToken();
   }
 
   async loadStoredToken() {
     const token = await this.storageService.get(TOKEN_KEY);
     if (token && token.value) {
-      console.log(token.value);
-      
       let decoded = helper.decodeToken(token.value);
       this.userData.next(decoded);
       this.isAuthenticated.next(true);
     } else {
-      console.log("nonnnnn ");
       this.isAuthenticated.next(false);
     }
-
   }
 
   getUserToken() {
@@ -69,7 +65,7 @@ export class UserService {
   getUserData() {
     const email = this.getUserToken()?.['email'];
     return this.http.get<User>(`http://localhost:3000/users/getUser/${email}`)
-    
+
   }
 
 

@@ -1,54 +1,16 @@
-.label-input-form{
-    font-family: Cursive;
-    font-weight: bold;
-    font-size:small;
-    width: 20%;
-    color: rgba(0,140,255,1);
+.label-item{
+  font-family:klavika_light_italic;
+  font-weight: bold;
+  font-size:small;
+  color: rgba(0,140,255,1);
+}
+.input-item{
+  font-family:klavika_light_italic;
 }
 
-.input-form{
-    border-color:rgba(0,140,255,1) ;
+.submit-button_accepter{
+  font-family:klavika_regular_italic ;
+  font-size: medium;
+  width: 100;
 }
-
-label {
-    text-decoration: line-through;
-}
-
-ion-item{
-    margin-top: 5%;
-    width: 100%;
-    
-}
-
-.btn_radio{
-    font-family: Cursive;
-    font-weight: bold;
-    font-size:small;
-    color: rgb(105,105,105);
-}
-
-.btnvalider{
-    position: absolute ;
-    left: 10%;
-    bottom: 10px;
-    right: 10%;
-    height: 2cm; 
-}
-
-ion-select-option{
-    font-family: Cursive;
-    font-weight: bold;
-    font-size:small;
-    color: rgba(0,140,255,1);
-  }
-ion-select{
-    --border-width:100%
-}
-
-.submit-button{
-    font-family: Cursive;
-    font-weight: bold;
-    font-size: medium;
-}
-
 

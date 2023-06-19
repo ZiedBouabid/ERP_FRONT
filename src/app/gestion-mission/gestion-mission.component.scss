@@ -8,8 +8,8 @@ ion-button {
     height: 1cm;
     font-family: Cursive;
     font-size:medium;
-   
-  
+
+
 }
 .btn_en_attente{
     float: left;
@@ -33,12 +33,7 @@ ion-col{
 
 }
 
-ion-label{
-    font-family: Cursive;
-    font-size:small;
-    font-weight: bold;
-    color: rgba(0,140,255,1);
-}
+
 ion-text-center{
     height: 50%;
 }
@@ -46,3 +41,29 @@ ion-text-center{
 .vcenter{
    height: 50%;
   }
+
+
+
+
+.submit-button {
+  position: fixed;
+  left: 10%;
+  bottom: 10px;
+  right: 10%;
+  height: 1cm;
+  color: rgba(0,140,255,1);
+  font-family: Cursive;
+  font-size:medium;
+}
+
+.label_card_title{
+  font-family: klavika_bold_italic;
+  font-size:small;
+  color: rgba(0,140,255,1);
+}
+
+.label_card_content{
+  font-family: klavika_light_italic;
+  font-size:small;
+  color: black;
+}

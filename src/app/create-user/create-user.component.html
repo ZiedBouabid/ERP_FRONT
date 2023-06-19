@@ -1,56 +1,52 @@
 <app-header [title]="titre"></app-header>
-<ion-content class="ion-padding" contentId="tt1"> 
-    <form [formGroup]="createUserForm" (ngSubmit)="submitForm()" novalidate>
-        <ion-item>
-            <p slot="start" class="label-input-form" style="margin-right:40px ;">Nom</p>
-            <ion-input class="input-form"  placeholder="Nom" class="form-control" formControlName="nom" type="text" required></ion-input>
-          </ion-item>
-        <ion-item>
-            <p slot="start" class="label-input-form" style="margin-right:40px ;">Prénom</p>
-            <ion-input class="input-form"  placeholder="Prénom" class="form-control" formControlName="prenom" type="text" required></ion-input>
-          </ion-item>
-          
-   
-        <ion-item>
-            
-            <p slot="start" class="label-input-form" style="margin-right:40px ;">Email</p>
-            <ion-input class="input-form"  placeholder="Email" class="form-control" formControlName="email" type="email" required></ion-input>
-          </ion-item>
-          <span class="error ion-padding" *ngIf="isSubmitted && errorControl['email'].errors?.['required']">
-            Email est obligatoire.
-          </span>
-          <span class="error ion-padding" *ngIf="isSubmitted && errorControl['email'].errors?.['pattern']">
-            Email invalide.
-          </span>
-        <ion-item>
-            <p slot="start" class="label-input-form" style="margin-right:40px ;">Mot de passe</p>
-            <ion-input class="input-form"  placeholder="Mot de passe" class="form-control" formControlName="password" type="password" required ></ion-input>
-          </ion-item>
+<ion-content  contentId="tt1">
 
-        
+  <ion-card style="padding: 1em;height: 90%;">
+      <ion-list>
+    <ion-item>
+      <ion-label class="label-input-form" color="primary" >Nom :</ion-label>
+      <ion-input fill="outline"  class="input-form" [(ngModel)]="user.nom" type="text" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="label-input-form" color="primary" >Prénom :</ion-label>
+      <ion-input type="text"  class="input-form" [(ngModel)]="user.prenom" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="label-input-form" color="primary" >Email :</ion-label>
+      <ion-input type="text" class="input-form" [(ngModel)]="user.email" clearInput></ion-input>
+    </ion-item>
 
-        <ion-item>
-            <p slot="start" class="label-input-form" style="margin-right:40px ;" >Téléphone</p>
-            <ion-input class="input-form"  placeholder="Téléphone" class="form-control" formControlName="tele" type="text" required></ion-input>
-        </ion-item>
- 
+    <ion-item>
+      <ion-label class="label-input-form" color="primary" >Mot de passe :</ion-label>
+      <ion-input type="text" class="input-form" [(ngModel)]="user.password" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="label-input-form" color="primary" >Email personelle  :</ion-label>
+      <ion-input type="text" class="input-form" [(ngModel)]="user.email" clearInput></ion-input>
+    </ion-item>
 
-        <ion-item>
-            <p slot="start" class="label-input-form" style="margin-right:40px ;">Role</p>
-            <ion-list>
-                <ion-item>
-                  <ion-select formControlName="role"  [compareWith]="compareTech" interface="popover" style="width: 100%;" placeholder="Selectionnez le role">
-                    <ion-select-option value="RRH">Responsable RH</ion-select-option>
-                    <ion-select-option value="RACH">Responsable Achat</ion-select-option>
-                    <ion-select-option value="RPLA">Responsable PLN</ion-select-option>
-                  </ion-select>
-                </ion-item>
-              </ion-list>
-          </ion-item>
-
-    <ion-row >
-        <ion-button   type="submit" class="submit-button" color="success">Enregistrer</ion-button>
-    </ion-row>
-    </form>
-
+      <ion-item>
+        <ion-select
+          style="font-family:klavika_light_italic;"
+          label="Role"
+          interface="action-sheet"
+          placeholder="Choisir un role"
+          cancelText="Annuler"
+          [(ngModel)]="this.user.role"
+        >
+        <ion-select-option style="font-family:klavika_light_italic;" *ngFor="let role of ['Admin','RSPLA','CHPLA',];" [value]="role">{{role}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </ion-list>
+</ion-card>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+
+    <ion-row>
+      <ion-col size-md="12" size-lg="12" size-xs="12">
+        <ion-button (click)="saveUser()" style="width: 100%;height: 1cm;" name="accepter" type="submit" class="submit-button_accepter" color="success">Enregistrer</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

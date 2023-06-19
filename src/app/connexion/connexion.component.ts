@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { NavigationExtras, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 import { AlertController } from '@ionic/angular';
 import { DataService } from '../data.service';
 import { UserService } from '../user.service';
@@ -29,14 +29,14 @@ export class ConnexionComponent  implements OnInit {
   public jwt: string | undefined;
   public isSubmitted = false;
   public is_cred_false = false;
-  
+
   constructor(private userService: UserService, private router:Router,private storageService: StorageService,private  alertController: AlertController,private http: HttpClient , private navCtrl: NavController, private dataService: DataService
     ){
   }
   goTopassword() {
     this.navCtrl.navigateForward('/password');
   }
-  
+
   goTowelcome() {
     this.navCtrl.navigateForward('/welcome');
   }
@@ -52,7 +52,7 @@ export class ConnexionComponent  implements OnInit {
       this.jwt = res.access_token;
       this.storageService.set(TOKEN_KEY,this.jwt)
       this.userService.isAuthenticated.next(true);
-      console.log(this.storageService.get(TOKEN_KEY)); 
+      console.log(this.storageService.get(TOKEN_KEY));
       let decoded = helper.decodeToken(this.jwt as string);
       this.userService.userData.next(decoded);
       this.router.navigateByUrl('/welcome')
@@ -64,9 +64,9 @@ export class ConnexionComponent  implements OnInit {
         message: 'email ou mot de passe invalide !',
         buttons: ['OK']
       }).then(res => {
-  
+
         res.present();
-  
+
       });
     }
     );
@@ -78,7 +78,7 @@ export class ConnexionComponent  implements OnInit {
     });
   }
    ngOnInit() {
-  
+
   }
 
 }

@@ -1,11 +1,13 @@
+import { Fournisseur } from './../gestion-fournisseurs/gestion-fournisseurs.component';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
-import { Fournisseur } from '../gestion-fournisseurs/gestion-fournisseurs.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { MissionService } from '../mission.service';
+import { environment } from 'src/environments/environment';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-modifier-fournisseur',
@@ -13,46 +15,102 @@ import { MissionService } from '../mission.service';
   styleUrls: ['./modifier-fournisseur.component.scss'],
 })
 export class ModifierFournisseurComponent  implements OnInit {
-  fournisseurForm : FormGroup;
-  isSubmitted = false;
   public titre = "Modifier Fournisseur"
-  public fournisseur : Fournisseur   
-  
-  constructor(private missionService:MissionService,public datepipe: DatePipe,private router:Router,private loadingCtrl: LoadingController,public formBuilder: FormBuilder,private http: HttpClient) {
-    this.fournisseur = this.missionService.currentFournisseur;
-   }
-
-  ngOnInit() {
-    this.fournisseurForm = this.formBuilder.group({
-      nom: [''],
-      description: [''],
-      tele: [''],
-      certification: ['PHP' ],
-      competence: [''],
-    });
-
-    if(this.fournisseur){
-      this.fournisseurForm.get('nom')?.setValue(this.fournisseur.nom)
-      this.fournisseurForm.get('tele')?.setValue(this.fournisseur.tele)
-      this.fournisseurForm.get('description')?.setValue(this.fournisseur.description)
-      }
+  public fournisseur : Fournisseur = {
+    id: 0 ,
+    nom: '',
+    tele:'',
+    email:'',
+    type:'',
+    description: '',
+    certifications: [{
+     id:null,
+     type:''
+    }],
+    competences: [{
+      id:null,
+      type:''
+     }],
+    produits : []
   }
 
-  submitForm() {
-    this.isSubmitted = true;
-    if (this.fournisseurForm.valid) {
-    } else {
-      
-    }
+  public fournisseur_origine : Fournisseur = {
+    id: 0 ,
+    nom: '',
+    tele:'',
+    email:'',
+    type:'',
+    description: '',
+    certifications: [{
+     id:null,
+     type:''
+    }],
+    competences: [{
+      id:null,
+      type:''
+     }],
+    produits : []
   }
 
-  get errorControl() {
-    return this.fournisseurForm.controls;
-  }
 
-
-
-  compareTech(t1: string, t2: string) {
-     return (t1 && t2) && t1 === t2;;
-  } 
+constructor(private missionService:MissionService,public activatedRoute: ActivatedRoute,public datepipe: DatePipe,private router:Router,private  alertController: AlertController,private loadingCtrl: LoadingController,public formBuilder: FormBuilder,private http: HttpClient) {
 }
+
+ngOnInit() {
+     const state = this.router.getCurrentNavigation()?.extras.state
+    if (state && state != undefined){
+      this.fournisseur = state['fournisseur'] as Fournisseur
+    }
+}
+
+ajouterCertification(){
+    this.fournisseur.certifications.push({
+      id:null,
+      type:''
+    })
+}
+
+ajouterCompetence(){
+  this.fournisseur.competences.push({
+    id:null,
+    type:''
+  })
+
+}
+
+
+supprimerCertification(index: number){
+  delete this.fournisseur.certifications[index]
+}
+
+supprimerCompetence(index: number){
+delete this.fournisseur.competences[index]
+
+}
+
+saveFournisseur(){
+console.log(this.fournisseur)
+this.http.post(environment.backend +  '/fournisseur/updateFournisseur', this.fournisseur).subscribe((res: any) => {
+  this.fournisseur = this.fournisseur_origine
+  console.log(res);
+
+  this.router.navigateByUrl('/gestionFournisseurs')
+},
+(err) => {
+  this.alertController.create({
+    message: 'Un problème lors de ajout de fournisseur  !',
+    buttons: ['OK']
+  }).then(res => {
+
+    res.present();
+
+  });
+}
+);
+
+}
+
+
+}
+
+

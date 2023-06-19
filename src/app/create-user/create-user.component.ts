@@ -1,8 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
-import { Router } from '@angular/router';
-import { LoadingController, NavController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
+import { Mission } from '../gestion-mission/gestion-mission.component';
+import { Fournisseur } from '../gestion-fournisseurs/gestion-fournisseurs.component';
+import { environment } from 'src/environments/environment';
+import { UserService } from '../user.service';
 
 
 @Component({
@@ -12,71 +16,75 @@ import { LoadingController, NavController } from '@ionic/angular';
 })
 export class CreateUserComponent  implements OnInit {
 
-  createUserForm : FormGroup;
-  isSubmitted = false;
-  public titre = "Ajouter utilisateur"
+  public titre = "Créer Utilisateur"
 
-  constructor(private router:Router,private loadingCtrl: LoadingController,public formBuilder: FormBuilder,private http: HttpClient,private navCtrl: NavController) {
-
-   }
-
-  ngOnInit() {
-    this.createUserForm = this.formBuilder.group({
-      nom: [''],
-      prenom: [''],
-      password: [''],
-      role: [null, [ Validators.required ] ],
-      tele: [''],
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
-        ],
-      ]
-    });
+  public user : User = {
+        id: 0,
+        nom: '',
+        prenom: '',
+        role: '',
+        email: '',
+        password: '',
+        tele : ''
   }
 
-  submitForm() {
-    this.isSubmitted = true;
-    if (this.createUserForm.valid) {
-      this.createAccount();
-    } else {
-      
-    }
+  public user_origine : User = {
+        id: 0,
+        nom: '',
+        prenom: '',
+        role: '',
+        email: '',
+        password: '',
+        tele : ''
   }
 
-  get errorControl() {
-    return this.createUserForm.controls;
-  }
 
-  async createAccount(){
-    let credentials = {
-      nom:this.createUserForm.controls['nom'].value,
-      prenom:this.createUserForm.controls['prenom'].value,
-      role:this.createUserForm.controls['role'].value,
-      
-      email: this.createUserForm.controls['email'].value,
-      tele: this.createUserForm.controls['tele'].value,
-      password: this.createUserForm.controls['password'].value
-    }
-    console.log(credentials);
-    const loading = await this.loadingCtrl.create({
-      message: 'Création en cours...',
-      
-    });
-    loading.present();
-    this.http.post('http://localhost:3000/users/addUser', credentials).subscribe((res) => {    
-      loading.dismiss();
-      this.router.navigate(['/welcome'], {replaceUrl: true});
-    });
-    //this.router.navigateByUrl('/welcome')
-  }
+constructor(public userService:UserService,public activatedRoute: ActivatedRoute,private router:Router,private  alertController: AlertController,private loadingCtrl: LoadingController,public formBuilder: FormBuilder,private http: HttpClient) {
+}
 
- 
+ngOnInit() {
 
-  compareTech(t1: string, t2: string) {
-     return (t1 && t2) && t1 === t2;;
-  } 
+}
+
+saveUser(){
+this.http.post(environment.backend +  '/users/addUser/', this.user).subscribe((res: any) => {
+  this.user = this.user_origine
+  console.log(res);
+
+},
+(err) => {
+  this.alertController.create({
+    message: 'Ajout utilisateur echouée !',
+    buttons: ['OK']
+  }).then(res => {
+
+    res.present();
+
+  });
+}
+);
+
+}
+
+
+}
+
+
+
+export interface User{
+
+  id: number;
+  nom: string;
+
+  prenom: string;
+
+  role: string;
+
+  email: string;
+
+
+  password: string;
+
+  tele : string;
 
 }

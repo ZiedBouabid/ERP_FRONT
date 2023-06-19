@@ -1,9 +1,11 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
 import { MissionService } from '../mission.service';
+import { environment } from '../../environments/environment'
+import { IonDatetime, IonPopover } from '@ionic/angular';
 
 @Component({
   selector: 'app-gestion-fournisseurs',
@@ -14,35 +16,61 @@ export class GestionFournisseursComponent  implements OnInit {
 
   public titre = "Gestion Fournisseurs"
   public fournisseurs : Fournisseur[] = [];
+  public fournisseurs_origine : Fournisseur[] = [];
+  public competences : any[] = [];
 
-  constructor(private missionService: MissionService, private router: Router, private http: HttpClient, public datepipe: DatePipe) { 
-  
+
+  constructor(private missionService: MissionService, private router: Router, private http: HttpClient, public datepipe: DatePipe) {
+
   }
 
   ngOnInit() {
-    this.http.get<Fournisseur[]>(`http://localhost:3000/fournisseur/getfournisseurs/`).subscribe((res: any) => {
+    this.http.get<Fournisseur[]>(environment.backend+`/fournisseur/getfournisseurs/`).subscribe((res: any) => {
       console.log(res);
+      this.fournisseurs_origine=res
       this.fournisseurs=res
   })
-  
+
+  this.http.get<Fournisseur[]>(environment.backend+`/competences/getCompetences/`).subscribe((res: any) => {
+    console.log(res);
+    this.competences=res
+})
+
 }
 
 goToFournisseur(item : Fournisseur){
     this.missionService.currentFournisseur = item;
-    this.router.navigateByUrl('/modifierFournisseur')
+    this.router.navigateByUrl('/modifierFournisseur', { state: { fournisseur: item }});
+}
+
+getCompetences(competences:Competence[]){
+  return Array.prototype.concat(competences.map(cmp =>cmp.type))
+}
+
+filterFournisseurs(competence :  any){
+  if(competence){
+    this.fournisseurs = this.fournisseurs_origine.filter(fournisseur => fournisseur.competences.map(cmp => cmp.type).includes(competence))
+  }
+  else{
+    this.fournisseurs = this.fournisseurs_origine;
+  }
 }
 
 
+goAddFournisseur(){
+  this.router.navigateByUrl('/addFournisseur')
 }
 
 
 
 
+}
 
 export interface Fournisseur{
-    id:number;
+    id?:number | null ;
     nom: string;
     tele:string;
+    email: string;
     type:string
     description: string
     certifications: Certification[]
@@ -51,17 +79,19 @@ export interface Fournisseur{
  }
 
 export interface Produit{
-    id : number,
+    id? : number | null ,
     nom : string;
 }
 
 
 export interface Certification{
-    id : number;
+    id? : number | null;
     type : string;
 }
 
 export interface Competence {
-    id : number;
+    id? : number | null ;
     type : string;
 }
+
+

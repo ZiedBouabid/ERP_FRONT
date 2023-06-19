@@ -1,11 +1,12 @@
+import { Fournisseur } from './../gestion-fournisseurs/gestion-fournisseurs.component';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
-import { Fournisseur } from '../gestion-fournisseurs/gestion-fournisseurs.component';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { MissionService } from '../mission.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-ajouter-fournisseur',
@@ -14,48 +15,91 @@ import { MissionService } from '../mission.service';
 })
 export class AjouterFournisseurComponent  implements OnInit {
 
-  fournisseurForm : FormGroup;
-  isSubmitted = false;
-  public titre = "Modifier Fournisseur"
-  public fournisseur : Fournisseur   
-  
-  constructor(private missionService:MissionService,public datepipe: DatePipe,private router:Router,private loadingCtrl: LoadingController,public formBuilder: FormBuilder,private http: HttpClient) {
-    this.fournisseur = this.missionService.currentFournisseur;
-   }
+    public titre = "Ajouter Fournisseurs"
+    public fournisseur : any = {
+      nom: '',
+      tele:'',
+      email:'',
+      type:'',
+      description: '',
+      certifications: [{
+       type:''
+      }],
+      competences: [{
+        type:''
+       }],
+      produits : []
+    }
+
+    public fournisseur_origine : any = {
+      nom: '',
+      tele:'',
+      email:'',
+      type:'',
+      description: '',
+      certifications: [{
+       type:''
+      }],
+      competences: [{
+        type:''
+       }],
+      produits : []
+    }
+
+
+  constructor(private missionService:MissionService,public datepipe: DatePipe,private router:Router,private  alertController: AlertController,private loadingCtrl: LoadingController,public formBuilder: FormBuilder,private http: HttpClient) {
+  }
 
   ngOnInit() {
-    this.fournisseurForm = this.formBuilder.group({
-      nom: [''],
-      description: [''],
-      tele: [''],
-      certification: ['PHP' ],
-      competence: [''],
-    });
 
-    if(this.fournisseur){
-      this.fournisseurForm.get('nom')?.setValue(this.fournisseur.nom)
-      this.fournisseurForm.get('certification')?.setValue(this.fournisseur.certifications)
-      this.fournisseurForm.get('competence')?.setValue(this.fournisseur.competences)
-      this.fournisseurForm.get('tele')?.setValue(this.fournisseur.tele)
-      this.fournisseurForm.get('description')?.setValue(this.fournisseur.description)
-      }
   }
 
-  submitForm() {
-    this.isSubmitted = true;
-    if (this.fournisseurForm.valid) {
-    } else {
-      
-    }
+  ajouterCertification(){
+      this.fournisseur.certifications.push({
+        type:''
+      })
   }
 
-  get errorControl() {
-    return this.fournisseurForm.controls;
+  ajouterCompetence(){
+    this.fournisseur.competences.push({
+      type:''
+    })
+
   }
 
 
+  supprimerCertification(index: number){
+    delete this.fournisseur.certifications[index]
+  }
 
-  compareTech(t1: string, t2: string) {
-     return (t1 && t2) && t1 === t2;;
-  } 
+supprimerCompetence(index: number){
+  delete this.fournisseur.competences[index]
+
 }
+
+saveFournisseur(){
+  console.log(this.fournisseur)
+  this.http.post(environment.backend +  '/fournisseur/saveFournisseur', this.fournisseur).subscribe((res: any) => {
+    this.fournisseur = this.fournisseur_origine
+    console.log(res);
+
+    this.router.navigateByUrl('/gestionFournisseurs')
+  },
+  (err) => {
+    this.alertController.create({
+      message: 'Un problème lors de ajout de fournisseur  !',
+      buttons: ['OK']
+    }).then(res => {
+
+      res.present();
+
+    });
+  }
+  );
+
+}
+
+
+}
+
+

@@ -1,147 +1,24 @@
-ion-button {
-    --border-radius: 0px;
-}
-.btn_en_accepte{
-    float: right;
-    --margin: 0 !important;
-    width: 90%;
-    height: 1cm;
-    font-family: Cursive;
-    font-size:medium;
-   
-  
-}
-
-.btn_en_attente{
-    float: left;
-    width: 90%;
-    height: 1cm;
-    font-family: Cursive;
-    font-size:medium;
-}
-
-ion-col{
-    --padding-start: 0 !important;
-    --padding-end: 0 !important;
-    --padding-top: 0 !important;
-    --padding-bottom: 0 !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    --margin-left: 0 !important;
-    --margin-right: 0 !important;
-
-}
-
-ion-label{
-    font-family: Cursive;
-    font-size:small;
-    font-weight: bold;
-    color: rgba(0,140,255,1);
-}
-ion-text-center{
-    height: 50%;
-}
-
-.vcenter{
-   height: 50%;
-  }
-
-.switch-toggle {
-    background: white;
-    width: 100%;
-    height: 7%;
-    border-style: none;
-    border-radius: 30px;
-    border-color: black;
-    border: solid;
- }
-
- .switch-toggle input {
-   position: absolute;
-   opacity: 0;
- }
-
- .scroll_col {
-    padding-top: 10px !important;
-    padding-bottom: 12px !important;
-    padding-left: 1em !important;
-    padding-right: 1em !important;
-    width: 40%; 
-    height: 100%;
- }
- 
-
-input + label {
- 
-   color: black;
-   cursor: pointer;
-   padding: 10px;
-   border-color: black;
-   text-align: center;
-   font-family: Cursive;
-   height: 100%;
-
- }
-input:checked + label {
-   background: rgba(0,140,255,1);
-   border-radius: 30px;
-   color: white;
-   height: 100%;
- }
-
- .switch-toggle .ckeck_left{
-    border-bottom-left-radius:30px ;
-    border-top-left-radius:30px ;
-    
-
- }
-
- .scroll{
-    flex-wrap: nowrap;
-    overflow-x: scroll!important;
-    overflow-y: hidden;
-    }
-
-
- .switch-toggle .ckeck_centre{
-    
-}
-
-.switch-toggle .ckeck_right{
-    border-bottom-left-radius:30px ;
-    border-top-left-radius:30px ;
-}
-
-.submit-button {
-    position: fixed;
-    left: 10%;
-    bottom: 10px;
-    right: 10%;
-    height: 1cm;
-    color: rgba(0,140,255,1); 
-    font-family: Cursive;
-    font-size:medium;
-    
-
-}
-.padding_col{
-    padding: 1em !important;
-}
-
 
 ion-card {
-    max-height: 100%;
-    display: flex;
-    flex-direction: column;
+    padding: 1em;
 }
 
-ion-list {
-    overflow: hidden;
-    overflow-y: auto;
-    margin-bottom: 30%;
-    ::-webkit-scrollbar {
-      display: none;
-    }
+
+.label_card_title{
+    font-family: klavika_bold_italic;
+    font-size:small;
+    color: rgba(0,140,255,1);
   }
+
+.label_card_content{
+    font-family: klavika_light_italic;
+    font-size:small;
+    color: black;
+}
+
+
+.submit-button_accepter{
+    font-family:klavika_regular_italic ;
+    font-size: medium;
+    width: 100;
+}

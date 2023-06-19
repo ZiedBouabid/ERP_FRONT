@@ -1,11 +1,14 @@
+import { Fournisseur } from './../gestion-fournisseurs/gestion-fournisseurs.component';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LoadingController, NavController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { Mission } from '../gestion-mission/gestion-mission.component';
 import { MissionService } from '../mission.service';
+import { environment } from 'src/environments/environment';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-modifier-mission',
@@ -13,47 +16,131 @@ import { MissionService } from '../mission.service';
   styleUrls: ['./modifier-mission.component.scss'],
 })
 export class ModifierMissionComponent  implements OnInit {
-  missionForm : FormGroup;
-  isSubmitted = false;
   public titre = "Modifier Mission"
-  public mission : Mission   
-  
-  constructor(private missionService:MissionService,public datepipe: DatePipe,private router:Router,private loadingCtrl: LoadingController,public formBuilder: FormBuilder,private http: HttpClient,private navCtrl: NavController) {
-    this.mission = this.missionService.currentMission;
-   }
+  public fournisseurs : Fournisseur[] = [];
+  public mission : Mission = {
+    id: 0 ,
+    type: '',
+    client:'',
+    description:'',
+    datedebut:'',
+    datefin: '',
+    statut : '',
+    fournisseur: null,
+    produits : []
+  }
 
-  ngOnInit() {
-    this.missionForm = this.formBuilder.group({
-      client: [''],
-      datedebut: [''],
-      datefin: [''],
-      type: ['PHP' ],
-      fournisseur: [''],
-    });
-    console.log(this.mission)
-    if(this.mission){
-      this.missionForm.get('client')?.setValue(this.mission.client)
-      this.missionForm.get('type')?.setValue(this.mission.type)
-      this.missionForm.get('fournisseur')?.setValue(this.mission.fournisseur)
+  public mission_origine : Mission = {
+    id: 0 ,
+    type: '',
+    client:'',
+    description:'',
+    datedebut:'',
+    datefin: '',
+    statut : '',
+    fournisseur: null,
+    produits : []
+  }
+
+
+constructor(public userService:UserService, private missionService:MissionService,public activatedRoute: ActivatedRoute,public datepipe: DatePipe,private router:Router,private  alertController: AlertController,private loadingCtrl: LoadingController,public formBuilder: FormBuilder,private http: HttpClient) {
+}
+
+ngOnInit() {
+   console.log(this.userService.userinfos?.role)
+     const state = this.router.getCurrentNavigation()?.extras.state
+      if (state && state != undefined){
+        this.mission = state['mission'] as Mission
       }
-  }
+      this.http.get<Fournisseur[]>(environment.backend+`/fournisseur/getfournisseurs/`).subscribe((res: any) => {
+        console.log(res);
+        this.fournisseurs=res
+    })
+}
 
-  submitForm() {
-    this.isSubmitted = true;
-    if (this.missionForm.valid) {
-    } else {
-      
-    }
-  }
+ajouterProduit(){
+    this.mission.produits.push({
+      id:0,
+      nom:''
+    })
+}
 
-  get errorControl() {
-    return this.missionForm.controls;
-  }
-
+ajouterFournisseur(fournisseur : Fournisseur){
+  this.mission.fournisseur = fournisseur
+}
 
 
-  compareTech(t1: string, t2: string) {
-     return (t1 && t2) && t1 === t2;;
-  } 
+supprimerProduit(index: number){
+  delete this.mission.produits[index]
+}
+
+
+
+saveMission(){
+console.log(this.mission)
+this.http.post(environment.backend +  '/missions/saveMission/', this.mission).subscribe((res: any) => {
+  this.mission = this.mission_origine
+  console.log(res);
+  this.router.navigateByUrl('/gestionMission')
+},
+(err) => {
+  this.alertController.create({
+    message: 'Un problème lors de modification de la mission !',
+    buttons: ['OK']
+  }).then(res => {
+
+    res.present();
+
+  });
+}
+);
 
 }
+
+
+accepterMission(){
+  this.mission.statut ='Acceptée'
+  this.http.post(environment.backend +  '/missions/saveMission/', this.mission).subscribe((res: any) => {
+    this.mission = this.mission_origine
+    console.log(res);
+    this.router.navigateByUrl('/gestionMission')
+  },
+  (err) => {
+    this.alertController.create({
+      message: 'Un problème lors de modification de la mission !',
+      buttons: ['OK']
+    }).then(res => {
+
+      res.present();
+
+    });
+  }
+  );
+
+  }
+
+
+  refuserMission(){
+    this.mission.statut = "Refusée"
+    this.http.post(environment.backend +  '/missions/saveMission/', this.mission).subscribe((res: any) => {
+      this.mission = this.mission_origine
+      console.log(res);
+      this.router.navigateByUrl('/gestionMission')
+    },
+    (err) => {
+      this.alertController.create({
+        message: 'Un problème lors de modification de la mission !',
+        buttons: ['OK']
+      }).then(res => {
+
+        res.present();
+
+      });
+    }
+    );
+
+    }
+
+
+}
+

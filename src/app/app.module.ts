@@ -1,5 +1,5 @@
 import { importProvidersFrom, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+  import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy, RouterModule } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -25,7 +25,12 @@ import { AjouterFournisseurComponent } from './ajouter-fournisseur/ajouter-fourn
   declarations: [AppComponent,AjouterFournisseurComponent,ModifierFournisseurComponent,
     HeaderComponent,GestionFournisseursComponent,WelcomeComponent,ConnexionComponent,
     CreateUserComponent,GestionMissionComponent,ForgetPasswordComponent,ModifierMissionComponent],
-  imports: [RouterModule,IonicModule.forRoot(), AppRoutingModule,HttpClientModule,SharedModule],
+
+  imports: [RouterModule, AppRoutingModule,HttpClientModule,SharedModule,IonicModule.forRoot({
+    mode: 'ios',
+    scrollAssist: false,
+    scrollPadding: false
+  }),],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },importProvidersFrom(IonicStorageModule.forRoot()),DatePipe],
   bootstrap: [AppComponent],
   exports:[HeaderComponent]

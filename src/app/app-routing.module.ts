@@ -27,30 +27,54 @@ const routes: Routes = [
     path:'connexion',
     component: ConnexionComponent,
   },
-  {path: 'welcome', 
+  {path: 'welcome',
     component: WelcomeComponent,
-    canActivate : [AuthGuard,RoleGuard]
+    canActivate : [AuthGuard,RoleGuard],
+    data: {
+      roles: ['Admin','RSPLA','CHPLA']
+    }
   },
-  {path: 'createUser', 
+  {path: 'createUser',
   component: CreateUserComponent,
   },
-  {path: 'gestionMission', 
+  {path: 'gestionMission',
   component: GestionMissionComponent,
+  canActivate : [AuthGuard,RoleGuard],
+  data: {
+    roles: ['Admin','RSPLA','CHPLA']
+  }
   },
-  {path: 'forgetPassword', 
+  {path: 'forgetPassword',
   component: ForgetPasswordComponent,
   },
-  {path: 'modifierMission', 
+  {path: 'modifierMission',
   component: ModifierMissionComponent,
+  canActivate : [AuthGuard,RoleGuard],
+  data: {
+    roles: ['Admin','RSPLA','CHPLA']
+  }
+
   },
-  {path: 'gestionFournisseurs', 
+  {path: 'gestionFournisseurs',
   component: GestionFournisseursComponent,
+  canActivate : [AuthGuard,RoleGuard],
+  data: {
+    roles: ['Admin','RSPLA','CHPLA']
+  }
   },
-  {path: 'modifierFournisseur', 
+  {path: 'modifierFournisseur',
   component: ModifierFournisseurComponent,
+  canActivate : [AuthGuard,RoleGuard],
+  data: {
+    roles: ['Admin','RSPLA']
+  }
   },
-  {path: 'addFournisseur', 
+  {path: 'addFournisseur',
   component: AjouterFournisseurComponent,
+  canActivate : [AuthGuard,RoleGuard],
+  data: {
+    roles: ['Admin','RSPLA']
+  }
   },
 ];
 

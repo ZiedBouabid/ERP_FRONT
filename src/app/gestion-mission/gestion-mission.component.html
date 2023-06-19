@@ -1,63 +1,63 @@
 <app-header [title]="titre"></app-header>
-<ion-content class="ion-padding" contentId="tt1"> 
-  <ion-row>
-    <ion-col   size-md="6" size-lg="6" size-xs="6">
-    <ion-button  class="btn_en_accepte" fill="outline">Mission Acceptée</ion-button>
-  </ion-col>
-  <ion-col   size-md="6" size-lg="6" size-xs="6">
-    <ion-button class="btn_en_attente" fill="solid">Mission en Attente</ion-button>
-  </ion-col>
-  </ion-row>
-  <ion-list>
-    <ion-card *ngFor="let mission of missions" (click)="goToMission(mission)">
-      <ion-grid>
-       <ion-row>
-        <ion-col>
+<ion-content  contentId="tt1"  >
+
+  <ion-segment value="white" scrollable style="margin-top: 1em;margin-left: 1em;margin-right: 1em;">
+
+    <ion-segment-button (click)="filtermissions(null)" value="Tous">
+      <ion-label class="label_filer">Tous</ion-label>
+    </ion-segment-button >
+
+    <ion-segment-button (click)="filtermissions('Accepté')" value="missions_accpter">
+      <ion-label class="label_filer">Accepté</ion-label>
+    </ion-segment-button >
+
+    <ion-segment-button (click)="filtermissions('en attente')" value="missions_en_attente">
+      <ion-label class="label_filer">En attente</ion-label>
+    </ion-segment-button >
+  </ion-segment>
+
+  <ion-list  style="margin-bottom: 20%;">
+    <ion-card *ngFor="let mission of missions" (click)="goToMission(mission)" style="padding: 1em;">
+
+        <ion-row style="width: 100%;height: 50%;" style="margin-bottom: 10px;" >
+          <ion-col size-md="5" size-lg="5" size-xs="5" style="height: 100%;" class="padding_col" >
+            <ion-label class="label_card_title">Techno:</ion-label>
+            <br/>
+            <ion-text class="label_card_content" style="font-size: xx-small;" *ngFor="let produit of mission.produits">
+              {{produit.nom}}
+              <br/>
+            </ion-text>
+
+          </ion-col>
+          <ion-col size-md="4" size-lg="4" size-xs="4" style="height: 100%;" class="padding_col" >
+            <ion-label class="label_card_title">Debut:</ion-label>
+            <br/>
+            <ion-text class="label_card_content" >{{mission.datedebut | date: 'dd/MM/yyyy' }}</ion-text>
+          </ion-col>
+          <ion-col size-md="2" size-lg="2" size-xs="2" style="height: 100%;" class="padding_col" >
+            <ion-label class="label_card_title">statut</ion-label>
+          </ion-col>
+        </ion-row >
+
+        <ion-row style="width: 100%;height: 50%;">
+          <ion-col size-md="5" size-lg="5" size-xs="5"  style="height: 100%;" class="padding_col" >
+            <ion-label class="label_card_title">Client:</ion-label>
+            <br/>
+            <ion-text class="label_card_content" >{{mission.client}}</ion-text>
+          </ion-col>
+          <ion-col size-md="4" size-lg="4" size-xs="4"  style="height: 100%;" class="padding_col" >
+            <ion-label class="label_card_title">Fin:</ion-label>
+            <br/>
+            <ion-text class="label_card_content" >{{mission.datefin | date: 'dd/MM/yyyy'}}</ion-text>
+          </ion-col>
+          <ion-col size-md="2" size-lg="2" size-xs="2" style="height: 100%;" class="padding_col" >
+            <ion-label class="label_card_title" [ngStyle]="{'color': mission.statut==='Acceptée' ?  'green': 'red' }">{{mission.statut}}</ion-label>
+          </ion-col>
+        </ion-row >
 
 
-          <ion-grid>
-            <ion-row style="padding: 10px;"  class="ion-text-center">
-              <ion-label>Techno:</ion-label> {{mission.type}}
-            </ion-row>
-            <ion-row style="padding: 10px;"  class="ion-text-center">
-              <ion-label>Entreprise:</ion-label> {{mission.description}}
-            </ion-row>
-          </ion-grid>
-        
-        
-        
-        </ion-col>
-         <ion-col>
-          
 
-          <ion-grid>
-            <ion-row style="padding: 10px;"  class="ion-text-center">
-            <ion-label>Debut:</ion-label>  {{this.datepipe.transform(mission.datedebut, 'dd/MM/yyyy')}}
-            </ion-row>
-            <ion-row style="padding: 10px;"  class="ion-text-center">
-              <ion-label>Fin:</ion-label>  {{this.datepipe.transform(mission.datefin, 'dd/MM/yyyy')}}
-            </ion-row>
-          </ion-grid>
-        
-        
-        </ion-col>
-        <ion-col>
-          <ion-grid>
-            <ion-row style="padding: 10px;"  class="ion-text-center">
-              <ion-label>Statut mission:</ion-label> 
-              <ion-label></ion-label> 
-            </ion-row>
-            <ion-row style="padding: 10px;"  class="ion-text-center">
-              <ion-label  [ngStyle]="mission.statut=='Accepté'? {'color':'green'}:{'color':'red'}"  >{{mission.statut}}  </ion-label> 
-            </ion-row>
-          </ion-grid>
-        
-        
-        </ion-col>
-
-       </ion-row>
-      </ion-grid>
-  
     </ion-card>
   </ion-list>
+
 </ion-content>
