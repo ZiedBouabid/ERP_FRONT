@@ -12,7 +12,13 @@ import { ModifierFournisseurComponent } from './modifier-fournisseur/modifier-fo
 import { ModifierMissionComponent } from './modifier-mission/modifier-mission.component';
 import { RoleGuard } from './role.guard';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { GestionCHPLAComponent } from './gestion-chpla/gestion-chpla.component';
+import { GestionEmployes } from './gestion-employes/gestion-employes.component';
+import { AcceuilComponent } from './acceuil/acceuil.component';
+import { CreateMissionComponent } from './create-mission/create-mission.component';
+import { GestionCommandeComponent } from './gestion-commande/gestion-commande.component';
+import { CreateCommandeComponent } from './create-commande/create-commande.component';
+import { ModifierCommandeComponent } from './modifier-commande/modifier-commande.component';
+import { CreateEmployesComponent } from './create-employes/create-employes.component';
 
 const routes: Routes = [
   {
@@ -32,17 +38,23 @@ const routes: Routes = [
     component: WelcomeComponent,
     canActivate : [AuthGuard,RoleGuard],
     data: {
-      roles: ['Admin','RSPLA','CHPLA']
+      roles: ['Admin','CHPLA','RSACH','RSRH']
     }
   },
   {path: 'createUser',
   component: CreateUserComponent,
+  canActivate : [AuthGuard,RoleGuard],
+    data: {
+      roles: ['Admin']
+    }
   },
+  
+   
   {path: 'gestionMission',
   component: GestionMissionComponent,
   canActivate : [AuthGuard,RoleGuard],
   data: {
-    roles: ['Admin','RSPLA','CHPLA']
+    roles: ['Admin','CHPLA','RSPLA']
   }
   },
   {path: 'forgetPassword',
@@ -52,7 +64,7 @@ const routes: Routes = [
   component: ModifierMissionComponent,
   canActivate : [AuthGuard,RoleGuard],
   data: {
-    roles: ['Admin','RSPLA','CHPLA']
+    roles: ['Admin','Planning','CHPLA']
   }
 
   },
@@ -60,25 +72,43 @@ const routes: Routes = [
   component: GestionFournisseursComponent,
   canActivate : [AuthGuard,RoleGuard],
   data: {
-    roles: ['Admin','RSPLA','CHPLA']
+    roles: ['Admin','Planning','CHPLA']
   }
   },
   {path: 'modifierFournisseur',
   component: ModifierFournisseurComponent,
   canActivate : [AuthGuard,RoleGuard],
   data: {
-    roles: ['Admin','RSPLA']
+    roles: ['Admin','Planning']
   }
   },
   {path: 'addFournisseur',
   component: AjouterFournisseurComponent,
   canActivate : [AuthGuard,RoleGuard],
   data: {
-    roles: ['Admin','RSPLA']
+    roles: ['Admin','Planning']
   }
   },
-  {path: 'gestionCHplans',
-  component: GestionCHPLAComponent,
+  {path: 'gestionemployes',
+  component: GestionEmployes,
+  },
+  {path: 'createemployes',
+  component: CreateEmployesComponent,
+  },
+  {path: 'acceuil',
+  component: AcceuilComponent,
+  },
+  {path: 'createmission',
+  component: CreateMissionComponent,
+  },
+  {path: 'gestioncommande',
+  component: GestionCommandeComponent,
+  },
+  {path: 'createcommande',
+  component: CreateCommandeComponent,
+  },
+  {path: 'modifiercommande',
+  component: ModifierCommandeComponent,
   },
 ];
 

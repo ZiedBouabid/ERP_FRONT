@@ -25,7 +25,7 @@
 
                             <ion-item>
                                 <ion-icon name="person" class="icon-login"></ion-icon>
-                                <ion-input name="user" [errorText]="email.errors?.['required'] ? 'Email est obligatoire' : 'Adresse mail invalid' " class="form-control" required email="true" type="email" placeholder="Adresse email" [(ngModel)]="signInEmail" #email="ngModel"></ion-input>
+                                <ion-input name="user" [errorText]="email.errors?.['required'] ? 'Email est obligatoire' : 'Adresse mail invalide' " class="form-control" required email="true" type="email" placeholder="Adresse email" [(ngModel)]="signInEmail" #email="ngModel"></ion-input>
                               </ion-item>
                             <br />
                             <ion-item>
@@ -50,7 +50,7 @@
                     <ion-col>
                         <ion-label>
                           <ion-item lines="none">
-                            <ion-button (click)="goTowelcome()" color="blue" slot="end" class="forget_password" fill="clear">Mot de passe oublié ?</ion-button>
+                            <ion-button (click)="goTopassword()" color="blue" slot="end" class="forget_password" fill="clear">Mot de passe oublié ?</ion-button>
                           </ion-item>
                         </ion-label>
                     </ion-col>

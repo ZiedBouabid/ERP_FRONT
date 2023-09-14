@@ -12,11 +12,11 @@ import { environment } from 'src/environments/environment';
   templateUrl: './gestion-mission.component.html',
   styleUrls: ['./gestion-mission.component.scss'],
 })
-export class GestionMissionComponent  implements OnInit {
+export class GestionMissionComponent implements OnInit {
 
   public titre = "Gestion Missions"
-  public missions : Mission[] = [];
-  public missions_origine : Mission[] = [];
+  public missions: Mission[] = [];
+  public missions_origine: Mission[] = [];
 
 
 
@@ -25,43 +25,48 @@ export class GestionMissionComponent  implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get<Mission[]>(environment.backend+`/missions/getMissions/`).subscribe((res: any) => {
+    this.missionService.getMissions().subscribe((res: any) => {
       console.log(res);
-      this.missions=res
-      this.missions_origine=res
-  })
-}
-
-  goToMission(item : Mission){
-
-      this.router.navigateByUrl('/modifierMission', { state: { mission: item }});
+      this.missions = res
+      this.missions_origine = res
+    })
   }
 
-  filtermissions(statut : any){
-    if(statut){
+  goToMission(item: Mission) {
+
+    this.router.navigateByUrl('/modifierMission', { state: { mission: item } });
+  }
+
+  filtermissions(statut: any) {
+    if (statut) {
       this.missions = this.missions_origine.filter(mission => mission.statut == statut)
     }
-    else{
+    else {
       this.missions = this.missions_origine;
     }
   }
+  goCreateMission(){
+    this.router.navigate(['/createmission'], {replaceUrl: true});
+  }
 
 }
 
-export interface Mission{
-    id:number | null ;
-    type: string;
-    client : string ;
-    description:string;
-    datedebut:string
-    datefin: string
-    statut : string
-    produits : Produit[]
- }
+export interface Mission {
+  id: number | null;
+  type: string;
+  client: string;
+  description: string;
+  datedebut: string
+  datefin: string
+  statut: string
+  produit: string
+  fournisseur: string
+  produits: Produit[]
+}
 
 
- export interface Produit{
-  id:number | null ;
-  nom : string;
+export interface Produit {
+  id: number | null;
+  nom: string;
   fournisseurs: Fournisseur[]
 }

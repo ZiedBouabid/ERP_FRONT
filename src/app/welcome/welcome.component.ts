@@ -1,7 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { DataService } from '../data.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UserService } from '../user.service';
+import { User, UserService } from '../user.service';
 import { MenuController } from '@ionic/angular';
 
 @Component({
@@ -26,12 +26,3 @@ export class WelcomeComponent  implements OnInit {
  
 
 }
-
-interface User{
-  email:string
- id: string
- nom: string
- password: string
- prenom:string
- role:string
- }

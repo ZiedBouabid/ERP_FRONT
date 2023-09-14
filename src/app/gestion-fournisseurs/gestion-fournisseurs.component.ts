@@ -6,6 +6,7 @@ import { DataService } from '../data.service';
 import { MissionService } from '../mission.service';
 import { environment } from '../../environments/environment'
 import { IonDatetime, IonPopover } from '@ionic/angular';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-gestion-fournisseurs',
@@ -20,18 +21,23 @@ export class GestionFournisseursComponent  implements OnInit {
   public competences : any[] = [];
 
 
-  constructor(private missionService: MissionService, private router: Router, private http: HttpClient, public datepipe: DatePipe) {
+  constructor(
+    private missionService: MissionService,
+    private router: Router,
+    private http: HttpClient,
+    public datepipe: DatePipe,
+    private userService : UserService) {
 
   }
 
   ngOnInit() {
-    this.http.get<Fournisseur[]>(environment.backend+`/fournisseur/getfournisseurs/`).subscribe((res: any) => {
+    this.userService.getfournisseurs().subscribe((res: any) => {
       console.log(res);
       this.fournisseurs_origine=res
       this.fournisseurs=res
   })
 
-  this.http.get<Fournisseur[]>(environment.backend+`/competences/getCompetences/`).subscribe((res: any) => {
+  this.userService.getCompetences().subscribe((res: any) => {
     console.log(res);
     this.competences=res
 })
@@ -58,7 +64,7 @@ filterFournisseurs(competence :  any){
 
 
 goAddFournisseur(){
-  this.router.navigateByUrl('/addFournisseur')
+  this.router.navigate(['/addFournisseur'], {replaceUrl: true});
 }
 
 

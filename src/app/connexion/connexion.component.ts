@@ -34,11 +34,11 @@ export class ConnexionComponent  implements OnInit {
     ){
   }
   goTopassword() {
-    this.navCtrl.navigateForward('/password');
+    this.router.navigate(['/forgetPassword'], {replaceUrl: true});
   }
 
   goTowelcome() {
-    this.navCtrl.navigateForward('/welcome');
+    this.router.navigate(['/welcome'], {replaceUrl: true});
   }
   signIn(){
     this.isSubmitted = true;
@@ -46,7 +46,7 @@ export class ConnexionComponent  implements OnInit {
       username: this.signInEmail,
       password: this.signInPassword
     }
-    this.http.post(environment.backend +  '/auth/login', credentials).subscribe((res: any) => {
+    this.userService.signIn(credentials).subscribe((res: any) => {
       console.log(res);
       // NOTE: This is just for testing, typically you would store the JWT in local storage and retrieve from there
       this.jwt = res.access_token;
@@ -55,8 +55,7 @@ export class ConnexionComponent  implements OnInit {
       console.log(this.storageService.get(TOKEN_KEY));
       let decoded = helper.decodeToken(this.jwt as string);
       this.userService.userData.next(decoded);
-      this.router.navigateByUrl('/welcome')
-
+      this.router.navigate(['/welcome'], {replaceUrl: true});
      // this.navCtrl.navigateForward('/welcome')
     },
     (err) => {
@@ -73,7 +72,7 @@ export class ConnexionComponent  implements OnInit {
   }
   testRoute(){
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.jwt)
-    this.http.get('http://localhost:3000/users/test', {headers: headers}).subscribe((res) => {
+    this.userService.testRoute(headers).subscribe((res) => {
       console.log(res);
     });
   }

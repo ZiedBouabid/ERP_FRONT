@@ -41,6 +41,10 @@ export class HeaderComponent  implements OnInit {
     this.router.navigate(['/gestionFournisseurs'], {replaceUrl: true});
     
   }
+  goToGestionCommande(){
+    this.router.navigate(['/gestioncommande'], {replaceUrl: true});
+    
+  }
 
   goToConnexion(){
     this.router.navigate(['/connexion'], {replaceUrl: true});
@@ -51,9 +55,15 @@ export class HeaderComponent  implements OnInit {
     this.router.navigate(['/createUser'], {replaceUrl: true});
     //this.router.navigateByUrl('/createUser')
   }
+  
 
   goToWelcome(){
     this.router.navigate(['/welcome'], {replaceUrl: true});
+    //this.router.navigateByUrl('/welcome')
+  }
+
+  goCharcherPLN(){
+    this.router.navigate(['/gestionemployes'], {replaceUrl: true});
     //this.router.navigateByUrl('/welcome')
   }
 
